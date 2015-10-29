@@ -1,0 +1,4 @@
+TILE COLORS
+
+0,0,0 		ground
+128,128,128	blank (nothing)
