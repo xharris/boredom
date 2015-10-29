@@ -37,15 +37,50 @@ function load_level(name)
             	pos = {1,1}
 
             	-- which ground tile to show? (ROW, COLUMN)
- 
-            	if lx >= 2 and gcheck(lx-2,ly) then
-            		
-            		if not gcheck(lx,ly+2) then
+
+            	-- vertical block
+            	if gcheck(lx,ly+2) then
+            		pos = {2,1}
+            		if ly >= 2 and gcheck(lx,ly-2) then
+            			pos = {3,1}
+            		end
+            	elseif ly >= 2 and gcheck(lx,ly-2) then
+            		pos = {4,1}
+            	end
+
+            	--horizontal block
+            	if gcheck(lx+2,ly) then
+            		pos = {4,2}
+            		if lx >= 2 and gcheck(lx-2,ly) then
             			pos = {4,3}
-            		else
-            			pos = {1,3}
+            		end
+            	elseif lx >= 2 and gcheck(lx-2,ly) then
+            		pos = {4,4}
+            	end
+
+            	--box block
+            	if gcheck(lx+2,ly) then
+            		if gcheck(lx,ly+2) then
+            			pos = {1,2}
+            		end
+            		if ly >= 2 and gcheck(lx,ly+2) and gcheck(lx,ly-2) then
+            			pos = {2,2}
+            		end
+            		if ly >= 2 and gcheck(lx,ly-2) then
+            			pos = {3,2}
+            		end
+            	elseif lx >= 2 and gcheck(lx-2,ly) then
+            		if gcheck(lx,ly+2) then
+            			pos = {1,4}
+            		end
+            		if lx >= 2 and gcheck(lx,ly+2) and gcheck(lx,ly-2) then
+            			pos = {2,4}
+            		end
+            		if ly >= 2 and gcheck(lx,ly-2) then
+            			pos = {3,4}
             		end
             	end
+
 
                 sprite_batches["ground"]:add(
                 	love.graphics.newQuad((pos[2]-1)*33,(pos[1]-1)*33, 33, 33,images["ground"]:getWidth(), images["ground"]:getHeight()),
