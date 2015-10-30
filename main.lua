@@ -2,7 +2,13 @@ io.stdout:setvbuf("no")
 
 require "plugins/misc_functions"
 require "plugins/tile_manager"
+class = require "plugins/middleclass/middleclass"
 hc = require "plugins/Hardon-Collider"
+anim8 = require 'plugins/anim8/anim8'
+
+require "player"
+
+player = nil
 
 function love.conf(t)
     t.identity = nil                   -- The name of the save directory (string)
@@ -30,15 +36,17 @@ end
 
 function love.load()
     love.graphics.setBackgroundColor(255,255,255)
+    love.graphics.setDefaultFilter("nearest","nearest")
 
     -- load level 1
     load_level('level1')
 end
 
 function love.update(dt)
-
+    player:update(dt)
 end
 
 function love.draw()
     draw_level()
+    player:draw()
 end
