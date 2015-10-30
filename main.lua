@@ -1,7 +1,7 @@
 io.stdout:setvbuf("no")
 
-require "misc_functions"
-require "tile_manager"
+require "plugins/misc_functions"
+require "plugins/tile_manager"
 hc = require "plugins/Hardon-Collider"
 
 function love.conf(t)
@@ -32,7 +32,6 @@ function love.load()
     love.graphics.setBackgroundColor(255,255,255)
 
     -- load level 1
-    load_images()
     load_level('level1')
 end
 
