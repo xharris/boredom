@@ -46,22 +46,19 @@ function load_level(name)
                 t_width = images[name][2]
                 t_height = images[name][3]
                 t_rows = images[name][4]
-                t_columns = images[name][5]
+                t_columns = images[name][5]-1
 
                 row = 0
-                col = tile
-                --if tile >= t_columns then
-                    row = math.floor(tile/t_rows)
-                    col = tile-(math.floor((tile/t_columns))*t_columns)
-                --end
-
-
-                print(row..' '..col)--print(row*t_width..' '..col*t_height)
+                col = tile-1
+                if tile > t_columns then
+                    row = math.floor((tile-1)/t_columns) --fine and working
+                    col = (tile-1)-(math.floor((tile-1)/t_columns)*t_columns)
+                end
 
                 sprite_batches[name]:add(
-                    love.graphics.newQuad(col*t_height,row*t_width, img_width, img_height, images[name][1]:getDimensions()),
-                    pos[1]*(level_map["tilewidth"]+1),
-                    pos[2]*(level_map["tileheight"]+1)
+                    love.graphics.newQuad( (col*t_width), row*t_height, img_width, img_height, images[name][1]:getDimensions()),
+                    pos[1]*(level_map["tilewidth"]),
+                    pos[2]*(level_map["tileheight"])
                     )
 
                 table.insert(tiles,{name,pos[1],pos[2]})
