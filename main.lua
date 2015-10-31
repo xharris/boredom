@@ -9,6 +9,7 @@ anim8 = require 'plugins/anim8/anim8'
 require "player"
 
 player = nil
+collider = nil
 
 function love.conf(t)
     t.identity = nil                   -- The name of the save directory (string)
@@ -35,6 +36,7 @@ function love.conf(t)
 end
 
 function love.load()
+
     love.graphics.setBackgroundColor(255,255,255)
     love.graphics.setDefaultFilter("nearest","nearest")
 

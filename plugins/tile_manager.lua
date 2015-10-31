@@ -56,13 +56,18 @@ function load_level(name)
                         col = (tile-1)-(math.floor((tile-1)/t_columns)*t_columns)
                     end
 
+                    -- ad the tile to 
                     sprite_batches[name]:add(
                         love.graphics.newQuad( (col*t_width), row*t_height, img_width, img_height, images[name][1]:getDimensions()),
                         pos[1]*(level_map["tilewidth"]),
                         pos[2]*(level_map["tileheight"])
                         )
 
-                    table.insert(tiles,{name,pos[1],pos[2]})
+
+                    -- add hitbox to HCollider
+                    tile_rect = hc.rectangle(pos[1]*level_map["tilewidth"],pos[2]*level_map["tileheight"],t_width,t_height)
+
+                    table.insert(tiles,{name,pos[1],pos[2],tile_rect})
 
                 end
             end
